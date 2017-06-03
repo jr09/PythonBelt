@@ -11,7 +11,7 @@ def register(request):
             for error in response[1]:
                 messages.add_message(request, messages.ERROR, error)
             return redirect('first_app:index')
-        request.session['user_name'] = response[1]['name']
+        request.session['name'] = response[1]['name']
         request.session['user_id'] = response[1]['id']
         request.session.modified = True
         return redirect('first_app:home')
@@ -25,13 +25,13 @@ def login(request):
             for error in response[1]:
                 messages.add_message(request, messages.ERROR, error)
             return redirect('first_app:index')
-        request.session['user_name'] = response[1]['name']
+        request.session['name'] = response[1]['name']
         request.session['user_id'] = response[1]['id']
         request.session.modified = True
-        return redirect('first_app:index')
+        return redirect('first_app:home')
 
 def logout(request):
     if request.method == 'POST':
-        request.session.pop('user_name')
+        request.session.pop('name')
         request.session.pop('user_id')
     return redirect('first_app:index')

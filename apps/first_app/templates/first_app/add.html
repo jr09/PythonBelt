@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Plan</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Hi {{name}}</h1>
+            <form action="{% url 'logreg:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+        <div class="plan">
+            <form action="/addplan/{{user_id}}" method="post">
+                {% csrf_token %}
+                <label>Destination:</label>
+                <input type="text" name="destination"/>
+                <label>Description:</label>
+                <input type="text" name="description"/>
+                <label>Travel Date From:</label>
+                <input type="date" name="travel_from"/>
+                <label>Travel Date To:</label>
+                <input type="date" name="travel_to"/>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        {% if messages %}
+            <div class="errors">
+                <h2>Oops:(</h2>
+                {% for message in messages %}
+                    {% if 'error' in message.tags %}
+                        <p>{{message}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </body>
+</html>

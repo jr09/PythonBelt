@@ -4,12 +4,64 @@
         <meta charset="utf-8">
         <title>Home</title>
     </head>
+    <style>
+        td,th{
+            padding-right: 30px;
+        }
+    </style>
     <body>
-        welcome
-        <form action="{% url 'logreg:logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    </for,>
+        <div class="header">
+            <h1>Hi {{name}}</h1>
+            <form action="{% url 'logreg:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+        {% if user_trips %}
+            <div class="trips">
+                <h2>Your trip schdeule:</h2>
+                <table>
+                    <th>Destination</th>
+                    <th>start Date</th>
+                    <th>End Date</th>
+                    <th>Description</th>
+                    {% for trip in user_trips %}
+                        <tr>
+                            <td><a href="/destination/{{trip.travel_plan.id}}">{{trip.travel_plan.destination}}</a></td>
+                            <td>{{trip.travel_plan.start_date}}</td>
+                            <td>{{trip.travel_plan.end_date}}</td>
+                            <td>{{trip.travel_plan.description}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+        {% if other_plans %}
+            <div class="plans">
+                <h2>Other Travel Plans:</h2>
+                <table>
+                    <th>Name</th>
+                    <th>Destination</th>
+                    <th>Start Date</th>
+                    <th>End Date Date</th>
+                    <th>Do you want to join?</th>
+                    {% for plan in other_plans %}
+                        {% if plan.1|add:'1' == 1 %}
+                        <tr>
+                            <td>{{plan.0.creator.name}}</td>
+                            <td><a href="/destination/{{plan.0.id}}">{{plan.0.destination}}</a></td>
+                            <td>{{plan.0.start_date}}</td>
+                            <td>{{plan.0.end_date}}</td>
+                            <td><form action="/join/{{plan.0.id}}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Join</button>
+                            </form></td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+        <a href="/add">Add Travel Plan</a>
     </body>
 </html>

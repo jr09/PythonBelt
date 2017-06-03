@@ -1,0 +1,59 @@
+body{
+    font-family: "Century Gothic", sans-serif;
+    background-image: url('blurred.jpg');
+    color: white;
+    font-weight: lighter;
+}
+h1, h2{
+    font-weight: lighter;
+}
+#header{
+    text-align: center;
+    margin-bottom: 50px;
+}
+.login_register{
+    width: 400px;
+    /*border: 0.5px solid black;*/
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 180px;
+}
+.login_register label{
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.login_register input{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-bottom: 0.5px solid white;
+    background: inherit;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 20px;
+    outline-width: 0px;
+}
+.login_register button{
+    display: block;
+    width: 150px;
+    height: 40px;
+    background-color: #353651;
+    border:none;
+    color: white;
+    font-size: 16px;
+}
+.login_register input::selection{
+    background-color: inherit;
+}
+.errors{
+    width: 400px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 180px;
+    margin-top: -180px;
+}
+.errors p{
+    font-style: italic;
+    font-weight: bold;
+}
