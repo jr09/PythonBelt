@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dojo Secrets Login</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'first_app/index_css.css' %}" media="screen" title="no title"/>
+    </head>
+    <body>
+        <h1 id="header">Welcome to Python Belt!</h1>
+        <div class="login_register">
+            <h2>Already a member? Sign in!</h1>
+            <form action="{% url 'logreg:login' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <label>Email</label>
+                    <input type="text" name="email"/>
+                </div>
+                <div class="row">
+                    <label>Password</label>
+                    <input type="password" name="pwd"/>
+                </div>
+                <button type="submit">LOGIN</button>
+            </form>
+        </div>
+        <div class="login_register">
+            <h2>New user? Register!</h2>
+            <form action="{% url 'logreg:register' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <label>First Name</label>
+                    <input type="text" name="fname"/>
+                </div>
+                <div class="row">
+                    <label>Last Name</label>
+                    <input type="text" name="lname"/>
+                </div>
+                <div class="row">
+                    <label>Email</label>
+                    <input type="text" name="email"/>
+                </div>
+                <div class="row">
+                    <label>Password</label>
+                    <input type="password" name="pwd"/>
+                </div>
+                <div class="row">
+                    <label>Confirm Password</label>
+                    <input type="password" name="conf_pwd"/>
+                </div>
+                <button type="submit">REGISTER</button>
+            </form>
+        </div>
+        {% if messages %}
+            <div class="errors">
+                <h2>Oops:(</h2>
+                {% for message in messages %}
+                    {% if 'error' in message.tags %}
+                        <p>{{message}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </body>
+</html>
